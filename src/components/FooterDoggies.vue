@@ -8,12 +8,12 @@
 </template>
 
 <style scoped>
-    .about-link {
-        color: #333;
-    }
+.about-link {
+    color: #333;
+}
 
-    footer {
-        margin-top: 30px;
-        text-align: center;
-    }
+footer {
+    margin-bottom: 50px;
+    text-align: center;
+}
 </style>

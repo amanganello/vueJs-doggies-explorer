@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
+$primary_blue: #39a0ff;
+$primary_black: #14181d;
+$primary_gray: #343d46;
+$font-stack: 'Sixtyfour', sans-serif;
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
+  font-family: $font-stack;
 }
-
-$primary_blue: #39a0ff;
-$primary_black: #14181d;
-$font-stack: 'Honk', system-ui;
