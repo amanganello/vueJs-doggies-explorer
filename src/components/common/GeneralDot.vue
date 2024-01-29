@@ -1,21 +1,21 @@
 <template>
-    <span class="header_dot"></span>
+    <span class="empty_dot"></span>
 </template>
 
 <script>
 
 export default {
-    name: 'HeaderDot',
+    name: 'GeneralDot',
 }
 </script>
 
 <style scoped lang="scss">
-@use '../assets/main';
-.header_dot {
+@use '../../assets/main';
+.empty_dot {
   height: 10px;
   width: 10px;
   border-radius: 50%;
   display: inline-block;
-  border: solid 2px main.$primary_black;
+  border: solid 2px main.$primary_font_color_white;
 }
 </style>

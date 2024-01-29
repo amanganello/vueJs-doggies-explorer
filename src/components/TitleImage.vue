@@ -19,13 +19,14 @@ export default {
 <style scoped lang="scss">
 @use '../assets/main';
 .title_img_container {
-    height: 60px;
-    width: 60px;
-    border: 2px solid main.$primary_black;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 4px 4px main.$primary_gray;
-    border-radius: 10px;
+    box-shadow: main.$primary_box_shadow;
+    border-radius: 20px;
+    img {
+        width: 300px;
+        border-radius: 20px;
+    }
 }
 </style>

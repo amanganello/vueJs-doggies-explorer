@@ -1,7 +1,7 @@
 <template>
     <header class="doggies_header_container">
         <div class="header_dots_container">
-            <HeaderDot v-for="index in numberOfDots" :key="index"/>
+            <GeneralDot v-for="index in numberOfDots" :key="index"/>
         </div>
         <h1 class="doggies_title">
             {{title}}
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import HeaderDot from './HeaderDot.vue'
+import GeneralDot from './common/GeneralDot.vue'
 export default {
     name: 'HeaderDoggies',
     props: {
         title: String,
     },
     components: {
-        HeaderDot
+        GeneralDot
     },
     data() {
         return {
@@ -27,6 +27,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@use '../assets/main'; 
 .doggies_header_container {
     line-height: 1;
     width: 100%;
@@ -36,7 +37,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 2px groove black;
+    background-color: main.$primary_black;
     .header_dots_container {
         display: flex;
         flex-direction: row;
@@ -50,6 +51,7 @@ export default {
         width: 100%;
         justify-content: center;
         display: flex;
+        color: main.$primary_font_color_white;
     }
 }
 </style>

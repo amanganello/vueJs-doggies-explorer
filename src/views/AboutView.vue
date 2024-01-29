@@ -1,15 +1,22 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h3>Version 1.0.0</h3>
+    <router-link to="/" class="about_link">
+        Go Back
+    </router-link>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+<style scoped lang="scss">
+@use '../assets/main.scss';
+.about {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .about_link { 
+      color: main.$primary_font_color_white;;
   }
 }
 </style>
