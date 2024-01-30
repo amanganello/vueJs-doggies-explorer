@@ -22,8 +22,11 @@ export default {
 
 <style scoped lang="scss">
 @use '../../assets/main';
-.search_random_btn {
+.regular_button {
     @include main.search_btn;
+    &:disabled {
+        @include main.disabled_btn;
+    }
 }
 
 </style>

@@ -1,39 +1,49 @@
 <template>
     <div class="doggies_search_container">
-        <form @submit="onSubmit" class="search_doggies">
+        <form @submit="onSubmit" class="search_doggies" v-if="connected">
             <div class="doggies_tokenId_input">
                 <label>Token ID</label>
-                <input type="text" v-model="tokenId" name="tokenId" placeholder="Doggies token ID" class="input_tokenId"/>
+                <input type="text" autocomplete="off" v-model="tokenId" name="tokenId" placeholder="Token ID" class="input_tokenId" :disabled="isLoading"/>
             </div>
-            <input type="submit" value="Search" class="search_button" />
+            <input type="submit" value="Search" class="regular_button" :disabled="isLoading"/>
         </form>
-        <GeneralButton @btn-click="$emit('search-random-doggie')" text="Search Random" className="search_random_btn"/>
+        <GeneralButton @btn-click="$emit('search-random-doggie')" text="Search Random" className="regular_button" :disabled="isLoading" v-if="connected"/>
+        <GeneralButton @btn-click="$emit('connect-wallet')" text="Connect wallet" className="regular_button" v-if="!connected"/>
     </div>
 </template>
 
 <script>
 import GeneralButton from './common/GeneralButton.vue';
+import Data from '../assets/data.json'
 
 export default {
     name: 'DoggiesSearch',
     components: {
         GeneralButton
     },
+    props: {
+        isLoading: Boolean,
+        connected: Boolean,
+    },
     data() {
         return { 
-            tokenId: ''
+            tokenId: '',
         }
     },
     methods: {
         onSubmit(e) {
             e.preventDefault();
-            console.log('Doggies Search', this.tokenId)
             if (!this.tokenId) {
-                alert('Please enter a valid Token ID');
+                alert('Please enter a Token ID');
                 return;
             }
-            //TODO Doggies Search
-
+            // Checking that Doggi ID is not major to total supply - 1 as the id goes from 0 to 9999
+            if (this.tokenId > Data.totalDoggiesSupply - 1) {
+                alert('Please enter a valid Token Id from 0 to 9999');
+                return;
+            }
+            const tokenId = this.tokenId;
+            this.$emit('get-token-data', tokenId);
             //cleanUp
             this.tokenId = '';
         },
@@ -67,10 +77,16 @@ export default {
                 background-size: 15px 15px;
                 font-size: 16px;
                 border-radius: 10px;
+                &:focus-visible { 
+                    outline-color: main.$primary_green;
+                }
             }
         }
-        .search_button {
+        .regular_button {
             @include main.search_btn;
+            &:disabled {
+                @include main.disabled_btn;
+            }
         }
     }   
 }

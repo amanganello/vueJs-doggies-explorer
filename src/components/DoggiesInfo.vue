@@ -7,7 +7,10 @@
                         Title and Owner
                     </label>
                     <span class="info_content">
-                        Doggies Title Owner
+                        {{ tokenData.name }}
+                    </span>
+                    <span class="info_content token_owner">
+                        {{ tokenData.ownerOf }}
                     </span>
                 </div>
                 <div class="text_element" >
@@ -15,11 +18,11 @@
                         Description
                     </label>
                     <p class="info_content">
-                        Doggies description lorem ipsum adfasdf 
+                        {{ tokenData.description }} 
                     </p>
                 </div>
             </div>
-            <img class="doggies_img" src="../assets/images/doggies_changing.gif" alt="Doggi Image">
+            <img class="doggies_img" :src="tokenData.image_url" alt="Doggi Image">
         </div>
         <div class="doggies_info_table">
             <table>
@@ -27,13 +30,10 @@
                     <th>Trait</th>
                     <th>Value</th>
                 </tr>
-                <tr>
-                    <td>Trait one</td>
-                    <td>Value trait one</td>
-                </tr>
-                <tr>
-                    <td>Trait two</td>
-                    <td>Value trait two</td>
+                <!-- Using the key is not a good practice, proper way of doing would be using guid as the attribute don't have a unique key -->
+                <tr v-for="(attribute, index) in tokenData.attributes" :key="index">
+                    <td>{{attribute.trait_type}}</td>
+                    <td>{{attribute.value}}</td>
                 </tr>
             </table>
         </div>
@@ -43,6 +43,9 @@
 <script>
 export default {
     name: "DoggiesInfo",
+    props: {
+        tokenData: Object
+    },
 }
 </script>
 
@@ -62,6 +65,7 @@ export default {
         flex-direction: row;
         align-items: stretch;
         margin-bottom: 70px;
+        gap: 30px;
         .text_info_container {
             display: flex;
             flex-direction: column;
@@ -75,28 +79,36 @@ export default {
                 }
                 .info_content {
                     font-weight: 200;
-                    color: main.$primary_font_color_white
+                    color: main.$primary_font_color_white;
+                    white-space: pre-wrap;
+                    margin-block-start: 1em;
+                    margin-block-end: 1em;
+                    &.token_owner {
+                        font-size: 12px;
+                    }
                 }
             }
         }
         .doggies_img {
             box-shadow: main.$primary_box_shadow;
             border-radius: 20px;
+            width: 350px;
+            height: 350px;
         }
     }
     .doggies_info_table {
         table {
             width: 100%;
             table-layout: fixed;
-            th {
-                background-color: main.$primary_green;
-                color: main.$primary_font_color_white;
-            }
             td, th {
                 border: 1px solid main.$primary_black;
                 text-align: left;
                 padding: 8px;
                 border-radius: 5px;
+            }
+            th {
+                background-color: main.$primary_green;
+                color: main.$primary_font_color_white;
                 text-align: center; 
                 vertical-align: middle;
             }

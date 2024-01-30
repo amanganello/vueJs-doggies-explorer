@@ -10,12 +10,32 @@ $primary_font_color_white: $primary_white;
 $primary_font_color_black: $primary_black;
 $secondary_font_color: $primary_gray;
 $primary_btn_background_color: $primary_green;
+$btn_disabled_background_color: #6f6969;
 $small_padding: 20px;
 $normal_padding: 40px;
 $large_padding: 80px;
 $input_element_gap: 15px;
 $primary_box_shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
+body {
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary_light_green;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    width: 15px;
+    background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $primary_green;
+  }
+}
 #app {
   background-color: #1bd48b;
   background-image: linear-gradient(236deg, #1bd48b 33%, #145C42 78%);
@@ -30,4 +50,9 @@ $primary_box_shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px 
   background-color: $primary_btn_background_color;
   color: $primary_font_color_white;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+@mixin disabled_btn {
+  background-color: $btn_disabled_background_color;
+  box-shadow: none;
 }
