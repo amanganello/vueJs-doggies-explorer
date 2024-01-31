@@ -13,13 +13,18 @@
 </template>
 
 <script>
-import GeneralButton from './common/GeneralButton.vue';
-import Data from '../assets/data.json'
+import GeneralButton from '../common/GeneralButton.vue';
+import Data from '../../assets/data.json'
+import { useToast } from "vue-toastification";
 
 export default {
     name: 'DoggiesSearch',
     components: {
         GeneralButton
+    },
+    setup() {
+        const toast = useToast();
+        return { toast }
     },
     props: {
         isLoading: Boolean,
@@ -34,12 +39,12 @@ export default {
         onSubmit(e) {
             e.preventDefault();
             if (!this.tokenId) {
-                alert('Please enter a Token ID');
+                this.triggerToast('Please enter a Token ID');
                 return;
             }
             // Checking that Doggi ID is not major to total supply - 1 as the id goes from 0 to 9999
             if (this.tokenId > Data.totalDoggiesSupply - 1) {
-                alert('Please enter a valid Token Id from 0 to 9999');
+                this.triggerToast('Please enter a valid Token Id from 0 to 9999');
                 return;
             }
             const tokenId = this.tokenId;
@@ -47,12 +52,28 @@ export default {
             //cleanUp
             this.tokenId = '';
         },
+        triggerToast(message) {
+            this.toast.error(message, {
+                position: "top-right",
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: "button",
+                icon: "fas fa-rocket",
+                rtl: false
+            })
+        }
     }
 }
 </script>
 <!-- TODO style the button -->
 <style lang="scss" scoped>
-@use '../assets/main';
+@use '../../assets/main';
 
 .doggies_search_container {
     display: flex;

@@ -8,7 +8,7 @@
 </template>
 
 <style scoped lang="scss">
-@use '../assets/main';
+@use '../../assets/main';
 
 footer {
     padding-bottom: main.$large_padding;

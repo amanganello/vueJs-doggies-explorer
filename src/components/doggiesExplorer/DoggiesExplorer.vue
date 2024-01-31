@@ -2,17 +2,18 @@
     <main class="content_container">
         <PageTitle titleText="The Doggies Explorer"/>
         <DoggiesSearch @get-token-data="getTokenData" :isLoading="isLoading" :connected="connected" @connect-wallet="connectWallet" @search-random-doggie="getRandomDoggi"/>
-        <DoggiesInfo v-show="Object.keys(tokenData).length > 0 && !isLoading" :tokenData="tokenData" />
+        <DoggiesInfo v-show="showInfoComp" :tokenData="tokenData" :isLoading="isLoading"/>
     </main>
 </template>
 
 <script>
-import PageTitle from './PageTitle.vue'
-import DoggiesSearch from './DoggiesSearch.vue'
-import DoggiesInfo from './DoggiesInfo.vue'
-import Data from '../assets/data.json'
-import Abi from '../assets/abi.json'
+import PageTitle from './PageTitle.vue';
+import DoggiesSearch from './DoggiesSearch.vue';
+import DoggiesInfo from './DoggiesInfo.vue';
+import Data from '../../assets/data.json';
+import Abi from '../../assets/abi.json';
 import Web3 from 'web3';
+import { useToast } from "vue-toastification";
 
 export default {
     name: 'DoggiesExplorer',
@@ -21,12 +22,17 @@ export default {
         DoggiesSearch,
         DoggiesInfo
     },
+    setup() {
+        const toast = useToast();
+        return { toast }
+    },
     data() {
         return { 
             connected: false,
             tokenData: {},
             isLoading: false,
             tokenId: null,
+            showInfoComp: false,
         }
     },
     created() {
@@ -47,10 +53,12 @@ export default {
                     })
                 }
             } catch (error) {
+                this.triggerToast(`Error connecting to the wallet`);
                 console.error('Error connecting to the wallet:', error);
             }
         },
         async getTokenData(tokenId) {
+            this.showInfoComp = true;
             if (this.checkStoredTokenId(tokenId)) {
                 return;
             }
@@ -64,8 +72,8 @@ export default {
                 const ownerOf = await this.getOwner(tokenId);
                 this.tokenData["ownerOf"] = ownerOf;
             } catch (error) {
-                console.error(`Error getting token URI for ID ${tokenId}:`, error);
-                throw error;
+                this.triggerToast(`Error getting token data for ID ${tokenId}`);
+                console.error(`Error getting token data for ID ${tokenId}:`, error);
             } finally {
                 this.isLoading = false;
             }
@@ -73,8 +81,9 @@ export default {
         async getOwner(tokenId) {
             try {
                 const ownerOf = await this.contract.methods.ownerOf(tokenId).call();
-                return ownerOf
+                return ownerOf;
             } catch (error) {
+                this.triggerToast(`Error getting owner for token ${tokenId}`);
                 console.error(`Error getting owner for token ${tokenId}:`, error);
             }
         },
@@ -83,7 +92,7 @@ export default {
             do {
                 randomNum = this.getRandomTokenId();
             } while (this.checkStoredTokenId(randomNum));
-
+            
             await this.getTokenData(randomNum);
         },
         checkStoredTokenId (tokenId) {
@@ -95,6 +104,22 @@ export default {
         },
         getRandomTokenId() {
             return Math.floor(Math.random() * Data.totalDoggiesSupply);
+        },
+        triggerToast(message) {
+            this.toast.error(message, {
+                position: "top-right",
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: "button",
+                icon: "fas fa-rocket",
+                rtl: false
+            })
         }
     }
 }

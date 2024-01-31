@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import GeneralDot from './common/GeneralDot.vue'
+import GeneralDot from '../common/GeneralDot.vue'
 export default {
     name: 'HeaderDoggies',
     props: {
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@use '../assets/main'; 
+@use '../../assets/main';
 .doggies_header_container {
     line-height: 1;
     width: 100%;

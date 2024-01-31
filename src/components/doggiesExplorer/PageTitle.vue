@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../assets/main';
+@use '../../assets/main';
 .doggies_explorer_title {
     font-size: 3em;
     background-size: 100%;

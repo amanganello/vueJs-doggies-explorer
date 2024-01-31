@@ -13,11 +13,10 @@ export default {
         imageSrc: String,
     },
 }
-
 </script>
 
 <style scoped lang="scss">
-@use '../assets/main';
+@use '../../assets/main';
 .title_img_container {
     display: flex;
     align-items: center;
