@@ -42,6 +42,9 @@ body {
   background-image: linear-gradient(236deg, #1bd48b 33%, #145C42 78%);
   font-weight: normal;
   font-family: $font_stack;
+  :focus-visible {
+    outline: $primary_green auto 1px;  
+  }
 }
 
 @mixin search_btn {

@@ -1,7 +1,7 @@
 <template>
     <div class="dog_page_title_container">
         <TitleImage imageSrc="src/assets/images/doggies_changing.gif" />
-        <h2 class="doggies_explorer_title">
+        <h2 class="doggies_explorer_title" tabindex="0">
             The Doggies Explorer
         </h2>
     </div>

@@ -6,7 +6,7 @@
                         Title and Owner
                     </label>
                     <p class="info_content" tabindex="0">
-                        {{ tokenData.name }}<br>{{ tokenData.ownerOf }}
+                        {{ tokenData.name }}<br> <br>{{ tokenData.ownerOf }}
                     </p>
                 </div>
                 <div class="text_element" >
@@ -18,7 +18,7 @@
                     </p>
                 </div>
             </div>
-            <img class="doggies_img" :src="tokenData.image_url" alt="Doggi Image" tabindex="0">
+            <img class="doggies_img" :src="tokenData.image_url" :alt="`${tokenData.name} Image`" tabindex="0">
         </div>
 </template>
 

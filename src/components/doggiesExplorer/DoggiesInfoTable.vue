@@ -1,11 +1,11 @@
 <template>
     <div class="doggies_info_table">
         <table>
-        <tr>
+        <tr tabindex="0">
             <th>Trait</th>
             <th>Value</th>
         </tr>
-        <tr v-for="(attribute, index) in tokenData.attributes" :key="index">
+        <tr v-for="(attribute, index) in tokenData.attributes" :key="index" tabindex="0">
             <td>{{ attribute.trait_type }}</td>
             <td>{{ attribute.value }}</td>
         </tr>
