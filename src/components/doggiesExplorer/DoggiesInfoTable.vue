@@ -15,10 +15,13 @@
   
 <script>
 export default {
-name: "DoggiesInfoTable",
-props: {
-    tokenData: Object,
-},
+    name: "DoggiesInfoTable",
+    props: {
+        tokenData: {
+                type:Object,
+                required: true
+            },
+        },
 };
 </script>
   
@@ -39,6 +42,15 @@ props: {
             color: main.$primary_font_color_white;
             text-align: center; 
             vertical-align: middle;
+        }
+        td {
+            @include main.responsive(mobile) {
+                font-size: 11px;
+                padding: 8px 0;
+            }
+            @include main.responsive(small) {
+                font-size: 14px;
+            }
         }
         tr:nth-child(odd) {
             background-color: main.$primary_light_green;

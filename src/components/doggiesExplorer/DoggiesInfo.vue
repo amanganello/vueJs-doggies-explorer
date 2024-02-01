@@ -1,8 +1,10 @@
 <template>
     <div class="doggies_info_card">
-        <DoggiesGralInfo v-show="!isLoading" :tokenData="tokenData"/>
-        <DoggiesInfoTable v-show="!isLoading" :tokenData="tokenData" />
-        <LoadingCard :isLoading="isLoading" className="doggies_info"/>
+        <div v-if="!isLoading">
+            <DoggiesGralInfo :tokenData="tokenData"/>
+            <DoggiesInfoTable :tokenData="tokenData" />
+        </div>
+        <LoadingCard v-else :isLoading="isLoading"/>
     </div>
 </template>
 
@@ -14,8 +16,14 @@ import LoadingCard from '../common/LoadingCard.vue'
 export default {
     name: "DoggiesInfo",
     props: {
-        tokenData: Object,
-        isLoading: Boolean,
+        tokenData: {
+            type:Object,
+            required: true
+        },
+        isLoading: {
+            type:Boolean,
+            required: true
+        },
     },
     components: {
         DoggiesInfoTable,
@@ -35,6 +43,9 @@ export default {
     flex-direction: column;
     max-width: 80%;
     margin: auto;
-    padding: main.$normal_padding;
+    padding: main.$normal_padding_margin;
+    @include main.responsive(mobile) {
+        padding: main.$small_padding_margin;
+    }
 }
 </style>

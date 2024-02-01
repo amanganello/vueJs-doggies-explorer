@@ -2,6 +2,7 @@
 
 $primary_black: #14181d;
 $primary_gray: #343d46;
+$secondary_black: #030303;
 $primary_green: #1e735a;
 $primary_white: #ffffff;
 $primary_light_green: #34d38a;
@@ -11,10 +12,12 @@ $primary_font_color_black: $primary_black;
 $secondary_font_color: $primary_gray;
 $primary_btn_background_color: $primary_green;
 $btn_disabled_background_color: #6f6969;
-$small_padding: 20px;
-$normal_padding: 40px;
-$large_padding: 80px;
-$input_element_gap: 15px;
+$small_padding_margin: 20px;
+$normal_padding_margin: 40px;
+$large_padding_margin: 80px;
+$xlarge_padding_margin: 100px;
+$element_gap_small: 15px;
+$element_gap_normal: 30px;
 $primary_box_shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 body {
@@ -42,6 +45,8 @@ body {
   background-image: linear-gradient(236deg, #1bd48b 33%, #145C42 78%);
   font-weight: normal;
   font-family: $font_stack;
+  // height: inherit;
+  // width: inherit;
   :focus-visible {
     outline: $primary_green auto 1px;  
   }
@@ -67,19 +72,16 @@ body {
           @content;
       }
   }
-
   @if $breakpoint == small {
       @media only screen and (min-width: 768px) and (max-width: 1023px) {
           @content;
       }
   }
-
   @if $breakpoint == medium {
       @media only screen and (min-width: 1024px) and (max-width: 1279px) {
           @content;
       }
   }
-
   @if $breakpoint == large {
       @media only screen and (min-width: 1280px) {
           @content;

@@ -1,13 +1,13 @@
 <template>
     <main class="content_container">
-        <PageTitle titleText="The Doggies Explorer"/>
+        <DoggiesExplorerPageTitle titleText="The Doggies Explorer"/>
         <DoggiesSearch @get-token-data="getTokenData" :isLoading="isLoading" :connected="connected" @connect-wallet="connectWallet" @search-random-doggie="getRandomDoggi"/>
         <DoggiesInfo v-show="showInfoComp" :tokenData="tokenData" :isLoading="isLoading"/>
     </main>
 </template>
 
 <script>
-import PageTitle from './PageTitle.vue';
+import DoggiesExplorerPageTitle from './DoggiesExplorerPageTitle.vue';
 import DoggiesSearch from './DoggiesSearch.vue';
 import DoggiesInfo from './DoggiesInfo.vue';
 import Data from '../../assets/data.json';
@@ -18,13 +18,17 @@ import { useToast } from "vue-toastification";
 export default {
     name: 'DoggiesExplorer',
     components: {
-        PageTitle,
+        DoggiesExplorerPageTitle,
         DoggiesSearch,
         DoggiesInfo
     },
     setup() {
         const toast = useToast();
-        return { toast }
+        const web3 = new Web3(window.ethereum);
+        const contractAddress = Data.contractAddress;
+        const abi = Abi;
+        const contract = new web3.eth.Contract(abi, contractAddress);
+        return { toast, web3, contract };
     },
     data() {
         return { 
@@ -34,13 +38,6 @@ export default {
             tokenId: null,
             showInfoComp: false,
         }
-    },
-    created() {
-        // Initialize contract instance when component is created
-        this.web3 = new Web3(window.ethereum);
-        this.contractAddress = Data.contractAddress;
-        this.abi = Abi;
-        this.contract = new this.web3.eth.Contract(this.abi, this.contractAddress);
     },
     methods: {
         async connectWallet() {
@@ -126,9 +123,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use '../../assets/main';
 .content_container {
     height: 100%;
-    padding: 100px 30px;
+    padding: main.$large_padding_margin main.$normal_padding_margin;
+    @include main.responsive(mobile) {
+        padding: main.$normal_padding_margin main.$small_padding_margin;
+    }
 }
 </style>
-

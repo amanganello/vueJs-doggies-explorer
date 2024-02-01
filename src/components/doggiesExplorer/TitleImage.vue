@@ -1,31 +1,34 @@
 <template>
-    <div class="title_img_container">
-        <img :src="imageSrc" ref="defaultUserImage" alt="default-user-img"/>
-    </div>
+    <img :src="imageSrc" :alt="altText"/>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 
 export default {
     name: 'PageTitle',
     props: {
-        imageSrc: String,
+        imageSrc: {
+            type:String,
+            required: true
+        },
+        altText: {
+            type:String,
+            required: true
+        },
     },
 }
 </script>
 
 <style scoped lang="scss">
 @use '../../assets/main';
-.title_img_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+img {
     box-shadow: main.$primary_box_shadow;
+    width: 300px;
+    height: auto;
     border-radius: 20px;
-    img {
-        width: 300px;
-        border-radius: 20px;
+    @include main.responsive(mobile) {
+        width: 250px;
     }
 }
 </style>

@@ -9,8 +9,14 @@
 export default {
     name: 'GeneralButton',
     props: {
-        text: String,
-        className: String
+        text: {
+            type: String,
+            required:true
+        },
+        className: {
+            type:String,
+            required:true
+        }
     },
     methods: {
         onClick() {
@@ -26,6 +32,9 @@ export default {
     @include main.search_btn;
     &:disabled {
         @include main.disabled_btn;
+    }
+    @include main.responsive(mobile) {
+        padding: 0;
     }
 }
 

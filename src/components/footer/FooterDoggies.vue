@@ -11,7 +11,7 @@
 @use '../../assets/main';
 
 footer {
-    padding-bottom: main.$large_padding;
+    padding-bottom: main.$large_padding_margin;
     text-align: center;
     color: main.$primary_font_color_white;
     .about_link { 

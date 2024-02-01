@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLoading" class="loading-card" :class="className">
+    <div class="loading-card">
         <div class="loading-info">
             <div class="loading-title"></div>
             <div class="loading-description"></div>
@@ -12,8 +12,14 @@
 export default {
     name: "LoadingCard",
     props: {
-        isLoading: Boolean,
-        className: String
+        isLoading: {
+            type:Boolean,
+            required: true
+        },
+        className: {
+            type: String,
+            required: true
+        }
     },
 }
 </script>
