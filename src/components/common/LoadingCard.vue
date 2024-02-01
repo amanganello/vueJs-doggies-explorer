@@ -15,10 +15,6 @@ export default {
         isLoading: {
             type:Boolean,
             required: true
-        },
-        className: {
-            type: String,
-            required: true
         }
     },
 }

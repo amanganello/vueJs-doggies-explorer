@@ -4,14 +4,14 @@
             <DoggiesGralInfo :tokenData="tokenData"/>
             <DoggiesInfoTable :tokenData="tokenData" />
         </div>
-        <LoadingCard v-else :isLoading="isLoading"/>
+        <LoadingCard v-else :isLoading="isLoading" data-testid="loading-indicator"/>
     </div>
 </template>
 
 <script>
-import DoggiesInfoTable from './DoggiesInfoTable.vue'
-import DoggiesGralInfo from './DoggiesGralInfo.vue'
-import LoadingCard from '../common/LoadingCard.vue'
+import DoggiesInfoTable from './DoggiesInfoTable.vue';
+import DoggiesGralInfo from './DoggiesGralInfo.vue';
+import LoadingCard from '../common/LoadingCard.vue';
 
 export default {
     name: "DoggiesInfo",

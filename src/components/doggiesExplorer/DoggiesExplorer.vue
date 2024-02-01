@@ -1,7 +1,12 @@
 <template>
     <main class="content_container">
         <DoggiesExplorerPageTitle titleText="The Doggies Explorer"/>
-        <DoggiesSearch @get-token-data="getTokenData" :isLoading="isLoading" :connected="connected" @connect-wallet="connectWallet" @search-random-doggie="getRandomDoggi"/>
+        <DoggiesSearch 
+            @get-token-data="getTokenData" 
+            :isLoading="isLoading" 
+            :connected="connected" 
+            @connect-wallet="connectWallet" 
+            @search-random-doggie="getRandomDoggi"/>
         <DoggiesInfo v-show="showInfoComp" :tokenData="tokenData" :isLoading="isLoading"/>
     </main>
 </template>
@@ -70,9 +75,10 @@ export default {
                 const uri = await this.contract.methods.tokenURI(tokenId).call();
                 const response = await fetch(uri);
                 const tokenData = await response.json();
-                this.tokenData = tokenData;
+                this.tokenData = JSON.parse(JSON.stringify(tokenData));
                 const ownerOf = await this.getOwner(tokenId);
                 this.tokenData["ownerOf"] = ownerOf;
+                console.log(await this.tokenData);
             } catch (error) {
                 this.triggerToast(`Error getting token data for ID ${tokenId}`);
                 console.error(`Error getting token data for ID ${tokenId}:`, error);

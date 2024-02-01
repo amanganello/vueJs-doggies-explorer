@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TitleImage from './TitleImage.vue'
+import TitleImage from './TitleImage.vue';
 
 export default {
     name: 'PageTitle',

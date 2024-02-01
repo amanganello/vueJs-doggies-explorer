@@ -24,13 +24,13 @@
 
 <script>
 export default {
-  name: "DoggiesGralInfo",
-  props: {
-    tokenData: {
-            type:Object,
-            required: true
-        },
-  },
+    name: "DoggiesGralInfo",
+    props: {
+        tokenData: {
+                type:Object,
+                required: true
+            },
+    },
 };
 </script>
 

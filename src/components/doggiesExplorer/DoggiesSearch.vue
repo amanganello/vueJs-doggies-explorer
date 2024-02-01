@@ -22,19 +22,20 @@
             @btn-click="searchRandomDoggie" 
             text="Search Random" 
             className="regular_button search_btn" 
-            :disabled="isLoading" 
+            :disabled="isLoading"
             v-if="connected"/>
         <GeneralButton 
-            @btn-click="$emit('connect-wallet')" 
+            @btn-click="$emit('connect-wallet')"
+            data-testid="connect-wallet-button"
             text="Connect wallet" 
-            className="regular_button search_btn random_doggie" 
+            className="regular_button search_btn random_doggie"
             v-if="!connected"/>
     </div>
 </template>
 
 <script>
 import GeneralButton from '../common/GeneralButton.vue';
-import Data from '../../assets/data.json'
+import Data from '../../assets/data.json';
 import { useToast } from "vue-toastification";
 
 export default {
