@@ -57,7 +57,11 @@ export default {
                     window.ethereum.request({ method: 'eth_requestAccounts'})
                     .then(() => {
                         this.connected = true;
+                        this.triggerToast('Connected with the account', 'success')
                     })
+                } else {
+                    this.triggerToast('Please download metamask');
+                    console.error('Please download metamask');
                 }
             } catch (error) {
                 this.triggerToast(`Error connecting to the wallet`);
@@ -113,21 +117,38 @@ export default {
         getRandomTokenId() {
             return Math.floor(Math.random() * Data.totalDoggiesSupply);
         },
-        triggerToast(message) {
-            this.toast.error(message, {
-                position: "top-right",
-                timeout: 5000,
-                closeOnClick: true,
-                pauseOnFocusLoss: true,
-                pauseOnHover: true,
-                draggable: true,
-                draggablePercent: 0.6,
-                showCloseButtonOnHover: false,
-                hideProgressBar: true,
-                closeButton: "button",
-                icon: "fas fa-rocket",
-                rtl: false
-            })
+        triggerToast(message, type = 'error') {
+            if (type === 'error') {
+                this.toast.error(message, {
+                    position: "top-right",
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: "button",
+                    icon: "fas fa-rocket",
+                    rtl: false
+                })
+            } else {
+                this.toast.success(message, {
+                    position: "top-right",
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: "button",
+                    icon: "fas fa-rocket",
+                    rtl: false
+                })
+            }
         }
     }
 }
