@@ -82,7 +82,6 @@ export default {
                 this.tokenData = JSON.parse(JSON.stringify(tokenData));
                 const ownerOf = await this.getOwner(tokenId);
                 this.tokenData["ownerOf"] = ownerOf;
-                console.log(await this.tokenData);
             } catch (error) {
                 this.triggerToast(`Error getting token data for ID ${tokenId}`);
                 console.error(`Error getting token data for ID ${tokenId}:`, error);
