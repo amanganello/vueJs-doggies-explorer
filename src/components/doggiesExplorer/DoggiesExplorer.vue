@@ -39,6 +39,11 @@ export default {
             showInfoComp: false,
         }
     },
+    created() {
+        if (window.ethereum && window.ethereum.isConnected()) {
+            this.connected = true;
+        }
+    },
     methods: {
         async connectWallet() {
             try {
